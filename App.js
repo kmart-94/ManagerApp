@@ -8,10 +8,13 @@ import firebase from 'firebase';
 
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, Text, View } from 'react-native';
+import ToLogOutButton from './src/components/ToLogOutButton';
+import AddEmployeeButton from './src/components/AddEmployeeButton';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
+import EmployeeListScreen from './src/screens/EmployeeListScreen';
 import LogOutScreen from './src/screens/LogOutScreen';
 
 const Stack = createStackNavigator();
@@ -49,6 +52,15 @@ function App() {
       {isSignedIn ?
         <Stack.Navigator>
           <Stack.Screen
+            name="employeeList"
+            component={EmployeeListScreen}
+            options={({navigation}) => ({title: "Employees",
+            headerTitleAlign: 'center',
+              headerLeft: () => <ToLogOutButton navigation={navigation} />,
+              headerRight: () => <AddEmployeeButton navigation={navigation} />
+            })}
+          />
+          <Stack.Screen
             name="logout"
             component={LogOutScreen}
             options={{title: "Log Out"}}
@@ -74,15 +86,6 @@ function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default () => {
   return (
