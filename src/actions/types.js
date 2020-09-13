@@ -7,3 +7,5 @@ export const LOGIN_SUCCESS= 'login_success';
 export const ERROR= 'error';
 
 export const LOGIN_START= 'login_start';
+
+export const EMPLOYEE_UPDATE= 'employee_update';

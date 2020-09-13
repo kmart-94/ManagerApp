@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 
 import {connect} from 'react-redux';
 import {emailChanged, passwordChanged, loginUser, createUser} from '../actions';
-import firebase from 'firebase';
 
 import {Text, StyleSheet} from 'react-native';
 import Card from './common/Card';
@@ -47,7 +46,7 @@ function LoginForm({type,
       { loading ? <Spinner />:
       <Button
         title={type}
-        type="outline"
+        //type="outline"
         containerStyle={styles.button}
         onPress={() => {
             if (type == "Log In") {

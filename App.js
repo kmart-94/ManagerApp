@@ -15,6 +15,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import EmployeeListScreen from './src/screens/EmployeeListScreen';
+import EmployeeCreateScreen from './src/screens/EmployeeCreateScreen';
 import LogOutScreen from './src/screens/LogOutScreen';
 
 const Stack = createStackNavigator();
@@ -56,9 +57,19 @@ function App() {
             component={EmployeeListScreen}
             options={({navigation}) => ({title: "Employees",
             headerTitleAlign: 'center',
-              headerLeft: () => <ToLogOutButton navigation={navigation} />,
-              headerRight: () => <AddEmployeeButton navigation={navigation} />
+              headerLeft: () => <ToLogOutButton
+                                  onPress={() =>navigation.navigate('logout')}
+                                />,
+              headerRight: () => <AddEmployeeButton
+                                  navigation={navigation}
+                                  onPress={() => navigation.navigate('employeeCreate')}
+                                />
             })}
+          />
+          <Stack.Screen
+            name="employeeCreate"
+            component={EmployeeCreateScreen}
+            options={{title: "Create Employee"}}
           />
           <Stack.Screen
             name="logout"

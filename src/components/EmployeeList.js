@@ -1,5 +1,6 @@
 import React from 'react';
 import {Text, View, StyleSheet, FlatList} from 'react-native';
+import EmployeeCreateForm from './EmployeeCreateForm';
 
 export default function EmployeeList() {
   const DATA = [
@@ -19,7 +20,7 @@ export default function EmployeeList() {
 
   return (
     <View styles={styles.container}>
-      <Text>Hey</Text>
+      <EmployeeCreateForm />
       <FlatList
         data={DATA}
         renderItem={({item}) => <Text>{item.title}</Text>}

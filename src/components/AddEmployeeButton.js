@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default ({navigation}) => {
+export default ({onPress}) => {
 
   return <Button
     icon= {
@@ -13,8 +13,8 @@ export default ({navigation}) => {
         color= 'white'
       />
     }
-    onPress={() =>navigation.navigate('logout') }
     containerStyle={styles.container}
+    onPress={onPress}
   ></Button>
 }
 

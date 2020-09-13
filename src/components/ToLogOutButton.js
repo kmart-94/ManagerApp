@@ -2,12 +2,12 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {Button} from 'react-native-elements';
 
-export default ({navigation}) => {
-  
+export default ({onPress}) => {
+
   return <Button
     title= "Log Out"
-    onPress={() =>navigation.navigate('logout') }
     containerStyle={styles.container}
+    onPress={onPress}
   ></Button>
 }
 
