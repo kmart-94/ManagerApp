@@ -9,3 +9,7 @@ export const ERROR= 'error';
 export const LOGIN_START= 'login_start';
 
 export const EMPLOYEE_UPDATE= 'employee_update';
+
+export const UPDATE_SCHEDULE = 'update_Schedule';
+
+export const SAVE_EMPLOYEE = "save_employee";

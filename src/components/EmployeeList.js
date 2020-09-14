@@ -20,7 +20,6 @@ export default function EmployeeList() {
 
   return (
     <View styles={styles.container}>
-      <EmployeeCreateForm />
       <FlatList
         data={DATA}
         renderItem={({item}) => <Text>{item.title}</Text>}

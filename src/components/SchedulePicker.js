@@ -4,6 +4,9 @@ import {Button} from 'react-native-elements';
 import { Feather } from '@expo/vector-icons';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import {connect} from 'react-redux';
+import {updateSchedule} from '../actions';
+
 const days = [
   {day: "Sunday", id: "0"},
   {day: "Monday", id: "1"},
@@ -35,23 +38,8 @@ function ButtonInList({item, onPress}) {
   );
 }
 
-export default function SchedulePicker({options}) {
-  const [selected, setSelected] = useState([]);
+function SchedulePicker({schedule, updateSchedule}) {
   const [isDropDown, setIsDropDown] = useState(false);
-
-  function filterOutSelected(value) {
-    return value !== this;
-  }
-
-  function updateSchedule(item) {
-    if (selected.includes(item)) {
-      const newArr = selected.filter(filterOutSelected, item);
-      setSelected([...newArr]);
-    }
-    else {
-      setSelected([...selected, item]);
-    }
-  }
 
   function toggleDropDown() {
     if (isDropDown) {
@@ -62,17 +50,16 @@ export default function SchedulePicker({options}) {
     }
   }
 
-
   return (
     <View style={styles.container}>
-      <Text style={{color: '#909090', fontWeight: 'bold', marginBottom: 5, fontSize: 16}}>
+      <Text style={styles.header}>
         Schedule
       </Text>
       <View style={{flexDirection: 'row'}}>
 
         <View style={styles.scheduleDisplay}>
           <FlatList
-            data={selected}
+            data={schedule}
             renderItem = {({item}) => <SelectedButton
                 item={item}
                 onPress={updateSchedule}
@@ -114,6 +101,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     padding: 10
   },
+  header: {
+    color: '#909090',
+    fontWeight: 'bold',
+    marginBottom: 5,
+    fontSize: 16
+  },
   scheduleDisplay: {
     flex: 1,
     minHeight: 50,
@@ -130,3 +123,9 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 0,
   }
 });
+
+function mapStateToProps(state) {
+  return state.employeeForm;
+}
+
+export default connect(mapStateToProps, {updateSchedule})(SchedulePicker);

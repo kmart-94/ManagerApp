@@ -7,7 +7,7 @@ import SchedulePicker from './SchedulePicker';
 import {connect} from 'react-redux';
 import {employeeUpdate} from '../actions';
 
-function EmployeeCreateForm({employeeUpdate, name, phone}) {
+function EmployeeCreateForm({employeeUpdate, name, phone, children}) {
   return (
     <Card>
       <CardSection>
@@ -33,18 +33,7 @@ function EmployeeCreateForm({employeeUpdate, name, phone}) {
       </CardSection>
       <CardSection>
         <View style={styles.container}>
-          <Button
-            title="Save"
-            containerStyle={styles.button}
-          />
-          <Button
-            title="Text"
-            containerStyle={styles.button}
-          />
-          <Button
-            title="Fire"
-            containerStyle={styles.button}
-          />
+          {children}
         </View>
       </CardSection>
     </Card>
@@ -53,9 +42,10 @@ function EmployeeCreateForm({employeeUpdate, name, phone}) {
 
 const styles = StyleSheet.create({
   button: {
-    width: "90%",
+    width: "100%",
     alignSelf: 'center',
-    paddingBottom: 10
+    marginBottom: 10,
+    paddingHorizontal: 10
   },
   container: {
     flex: 1,
