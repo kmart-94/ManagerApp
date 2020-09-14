@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import {Input, Button} from 'react-native-elements';
 import {Card, CardSection} from './common'
+import SchedulePicker from './SchedulePicker';
 
 import {connect} from 'react-redux';
 import {employeeUpdate} from '../actions';
@@ -28,13 +29,7 @@ function EmployeeCreateForm({employeeUpdate, name, phone}) {
         />
       </CardSection>
       <CardSection>
-        <Input
-          label="Shift"
-          placeholder="Monday"
-          /*value={email}
-          onChangeText={(newEmail) => emailChanged(newEmail)}*/
-          autoCorrect={false}
-        />
+        <SchedulePicker />
       </CardSection>
       <CardSection>
         <View style={styles.container}>
