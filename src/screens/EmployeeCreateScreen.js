@@ -6,21 +6,16 @@ import EmployeeCreateForm from '../components/EmployeeCreateForm';
 import {connect} from 'react-redux';
 import {saveEmployee} from '../actions';
 
-const EmployeeCreateScreen = ({saveEmployee}) => {
+const EmployeeCreateScreen = ({saveEmployee, name, schedule, phone, navigation}) => {
   return (
     <EmployeeCreateForm>
       <Button
         title="Save"
         containerStyle={styles.button}
-        onPress={saveEmployee}
-      />
-      <Button
-        title="Text"
-        containerStyle={styles.button}
-      />
-      <Button
-        title="Fire"
-        containerStyle={styles.button}
+        onPress={() => {
+          saveEmployee(name, schedule, phone);
+          navigation.navigate('employeeList');
+        }}
       />
     </EmployeeCreateForm>
   );
@@ -35,4 +30,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(null, {saveEmployee})(EmployeeCreateScreen);
+function mapStateToProps(state) {
+  return state.employeeForm;
+}
+
+export default connect(mapStateToProps, {saveEmployee})(EmployeeCreateScreen);
