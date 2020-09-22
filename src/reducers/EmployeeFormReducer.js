@@ -17,13 +17,6 @@ export default (state = INITIAL_STATE, action) => {
       }
       return {...state, schedule: [...state.schedule, action.payload]};
     case SAVE_EMPLOYEE:
-      if (action.payload) {
-        //do some stuff to save to firebaseio
-        //reset state to initial state
-      }
-      else {
-
-      }
       return INITIAL_STATE;
     default:
       return state;

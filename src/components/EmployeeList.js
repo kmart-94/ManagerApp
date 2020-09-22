@@ -1,29 +1,37 @@
-import React from 'react';
-import {Text, View, StyleSheet, FlatList} from 'react-native';
-import EmployeeCreateForm from './EmployeeCreateForm';
+import React, {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {employeesFetch} from '../actions';
+import _ from 'lodash';
 
-export default function EmployeeList() {
-  const DATA = [
-    {
-      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
-    },
-    {
-      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
-    },
-    {
-      id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
-    },
-  ];
+import {View, StyleSheet, FlatList} from 'react-native';
+import EmployeeListCard from './EmployeeListCard';
+
+function EmployeeList({employeesFetch, employeeList, navigation}) {
+  const [DATA, setData] = useState([]);
+  useEffect(() => {
+    employeesFetch();
+  }, []);
+
+  useEffect(() => {
+    let data = _.map(employeeList, (val, uid) => {
+      return {...val, uid};
+    });
+    setData(data);
+  }, [employeeList]);
 
   return (
-    <View styles={styles.container}>
+    <View style={styles.container}>
       <FlatList
         data={DATA}
-        renderItem={({item}) => <Text>{item.title}</Text>}
-        keyExtractor = {item => item.id}
+        renderItem={({item}) =>
+          <EmployeeListCard
+            name={item.name}
+            phone={item.phone}
+            schedule={item.schedule}
+            id={item.uid}
+            navigation={navigation}
+          />}
+        keyExtractor = {item => item.uid}
       />
     </View>
   );
@@ -32,5 +40,12 @@ export default function EmployeeList() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginHorizontal: 10
   }
 });
+
+function mapStateToProps(state) {
+  return state.employees;
+}
+
+export default connect(mapStateToProps, {employeesFetch})(EmployeeList);

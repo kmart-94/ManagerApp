@@ -16,6 +16,7 @@ import LoginScreen from './src/screens/LoginScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import EmployeeListScreen from './src/screens/EmployeeListScreen';
 import EmployeeCreateScreen from './src/screens/EmployeeCreateScreen';
+import EditEmployeeScreen from './src/screens/EditEmployeeScreen';
 import LogOutScreen from './src/screens/LogOutScreen';
 
 const Stack = createStackNavigator();
@@ -70,6 +71,11 @@ function App() {
             name="employeeCreate"
             component={EmployeeCreateScreen}
             options={{title: "Create Employee"}}
+          />
+          <Stack.Screen
+            name="employeeEdit"
+            component={EditEmployeeScreen}
+            options={{title: "Edit Employee"}}
           />
           <Stack.Screen
             name="logout"
