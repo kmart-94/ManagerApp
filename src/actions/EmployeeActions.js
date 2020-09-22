@@ -2,15 +2,19 @@ import firebase from 'firebase';
 import {EMPLOYEE_UPDATE,
   UPDATE_SCHEDULE,
   SAVE_EMPLOYEE,
-  EMPLOYEES_FETCH_SUCCESS} from './types';
+  EMPLOYEES_FETCH_SUCCESS,
+  EMPLOYEE_DELETED} from './types';
+
 
 export const employeeUpdate = ({prop, value}) => {
   return {type: EMPLOYEE_UPDATE, payload: {prop, value}};
 };
 
+
 export const updateSchedule = (item) => {
   return {type: UPDATE_SCHEDULE, payload: item};
 };
+
 
 export const saveEmployee = (name, schedule, phone, id) => {
   //gets current authenticated user on this device
@@ -30,6 +34,7 @@ export const saveEmployee = (name, schedule, phone, id) => {
   return {type: SAVE_EMPLOYEE}
 };
 
+
 export const employeesFetch = () => {
   const {currentUser} = firebase.auth();
 
@@ -41,14 +46,18 @@ export const employeesFetch = () => {
   };
 };
 
+
 export const clearEmployeeForm = () => {
   return {type: SAVE_EMPLOYEE}
 }
 
-export const restoreUserForm = (id) => {
 
-}
+export const deleteEmployee = (id) => {
+  const {currentUser} = firebase.auth();
 
-export const saveEditedEmployee = () => {
-
+  return (dispatch) => {
+    firebase.database().ref(`/users/${currentUser.uid}/employees/${id}`)
+    .remove();
+    dispatch({type: EMPLOYEE_DELETED});
+  }
 }

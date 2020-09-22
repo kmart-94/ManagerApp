@@ -1,4 +1,4 @@
-import {EMPLOYEE_UPDATE, UPDATE_SCHEDULE, SAVE_EMPLOYEE} from '../actions/types.js';
+import {EMPLOYEE_UPDATE, UPDATE_SCHEDULE, SAVE_EMPLOYEE, EMPLOYEE_DELETED} from '../actions/types.js';
 
 const INITIAL_STATE = {name: '', phone: '', schedule: [] ,error: null, loading: false};
 
@@ -7,7 +7,6 @@ function filterOutSelected(value) {
 }
 
 export default (state = INITIAL_STATE, action) => {
-  console.log(state);
   switch (action.type) {
     case EMPLOYEE_UPDATE:
       return {...state, [action.payload.prop]: action.payload.value};
@@ -17,6 +16,8 @@ export default (state = INITIAL_STATE, action) => {
       }
       return {...state, schedule: [...state.schedule, action.payload]};
     case SAVE_EMPLOYEE:
+      return INITIAL_STATE;
+    case EMPLOYEE_DELETED:
       return INITIAL_STATE;
     default:
       return state;

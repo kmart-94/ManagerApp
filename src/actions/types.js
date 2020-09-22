@@ -15,3 +15,5 @@ export const UPDATE_SCHEDULE = 'update_Schedule';
 export const SAVE_EMPLOYEE = "save_employee";
 
 export const EMPLOYEES_FETCH_SUCCESS = "employee_fetch_success";
+
+export const EMPLOYEE_DELETED = "employee_deleted";
